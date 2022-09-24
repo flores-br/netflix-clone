@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { firebaseAuth } from '../utils/firebase-config';
+
 import Card from '../components/Card';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
+
 import { getUsersLikedMovies } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 
