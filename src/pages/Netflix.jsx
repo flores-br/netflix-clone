@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Navbar from '../components/Navbar';
+import Slider from '../components/Slider';
 
 import { FaPlay } from 'react-icons/fa';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
-import { getGenres } from '../store';
+import { fetchMovies, getGenres } from '../store';
 
 const Container = styled.div`
   background-color: black;
@@ -65,12 +66,22 @@ const Container = styled.div`
 
 const Netflix = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const dispatch = useDispatch();
+  const movies = useSelector(state => state.netflix.movies);
+  const genres = useSelector(state => state.netflix.genres);
+  const genresLoaded = useSelector(state => state.netflix.genresLoaded);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getGenres());
   }, []);
+
+  useEffect(() => {
+    if (genresLoaded) {
+      dispatch(fetchMovies({ genres, type: 'all' }));
+    }
+  }, [genresLoaded]);
 
   onAuthStateChanged(firebaseAuth, currentUser => {
     if (!currentUser) navigate('/login');
@@ -109,6 +120,7 @@ const Netflix = () => {
           </div>
         </div>
       </div>
+      <Slider movies={movies} />
     </Container>
   );
 };
