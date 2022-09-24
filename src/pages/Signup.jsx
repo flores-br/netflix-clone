@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   position: relative;
+  overflow-y: hidden;
   .content {
     position: absolute;
     top: 0;
@@ -98,44 +99,44 @@ const Signup = () => {
         <Header login />
         <div className='body flex column a-center j-center'>
           <div className='text flex column'>
-            <h1>Unlimited Movies, TV shows and more</h1>
+            <h1>Unlimited movies, TV shows and more.</h1>
             <h4>Watch anywhere. Cancel anytime.</h4>
             <h6>
-              Ready to watch? Enter your email to create or restart membership
+              Ready to watch? Enter your email to create or restart membership.
             </h6>
           </div>
           <div className='form'>
             <input
               type='email'
-              name='email'
-              placeholder='Email Address'
-              value={formValues.email}
+              placeholder='Email address'
               onChange={e =>
                 setFormValues({
                   ...formValues,
                   [e.target.name]: e.target.value,
                 })
               }
+              name='email'
+              value={formValues.email}
             />
             {showPassword && (
               <input
                 type='password'
-                name='password'
                 placeholder='Password'
-                value={formValues.password}
                 onChange={e =>
                   setFormValues({
                     ...formValues,
                     [e.target.name]: e.target.value,
                   })
                 }
+                name='password'
+                value={formValues.password}
               />
             )}
             {!showPassword && (
               <button onClick={() => setShowPassword(true)}>Get Started</button>
             )}
           </div>
-          <button onClick={handleSignIn}>Sign Up</button>
+          {showPassword && <button onClick={handleSignIn}>Log In</button>}
         </div>
       </div>
     </Container>
