@@ -11,7 +11,7 @@ app.use(express.json());
 
 mongoose
   .connect(
-    'mongodb+srv://admin:admin@cluster0.wgsa5.mongodb.net/netflix?retryWrites=true&w=majority'
+    'MONGO_URI'
   )
   .then(() => {
     console.log('Connected to MongoDB');
